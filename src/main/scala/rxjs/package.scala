@@ -11,4 +11,7 @@ package object rxjs {
    * @tparam T value type
    */
   type ValOrObs[T] = js.|[T,js.|[Observable[T],js.Promise[T]]]
+
+  @inline def interval(period: Int = 0) = Rx.interval(period)
+  @inline def zip[T](o1: Observable[T], o2: Observable[T]) = Rx.zip(o1, o2)
 }

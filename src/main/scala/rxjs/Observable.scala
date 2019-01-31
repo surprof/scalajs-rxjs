@@ -119,6 +119,9 @@ object Observable {
     def take(count: Int): Observable[T] = Operators.take(o,count)
 
     @inline
+    def takeWhile(predicate: js.Function2[T, Int, Boolean]): Observable[T] = Operators.takeWhile(o,predicate)
+
+    @inline
     def toPromise: RxPromise[T] = Operators.toPromise(o)
 
     @inline

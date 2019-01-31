@@ -116,6 +116,13 @@ object Operators {
   }
 
   @js.native
+  @JSImport("rxjs/operator/takeWhile","takeWhile","Rx.Observable.prototype.takeWhile")
+  object takeWhile extends js.Object {
+    @JSName("call")
+    def apply[T](observable: Observable[T], predicate: js.Function2[T, Int, Boolean]): Observable[T] = js.native
+  }
+
+  @js.native
   @JSImport("rxjs/operator/toPromise","toPromise","Rx.Observable.prototype.toPromise")
   object toPromise extends js.Object {
     @JSName("call")

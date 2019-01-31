@@ -1,4 +1,4 @@
-version in ThisBuild := "0.0.6-SNAPSHOT"
+version in ThisBuild := "0.1.0-SNAPSHOT"
 
 organization in ThisBuild := "de.surfice"
 
@@ -6,18 +6,18 @@ lazy val commonSettings = Seq(
   scalacOptions ++= Seq("-deprecation","-unchecked","-feature","-Xlint"),
   resolvers += Resolver.sonatypeRepo("snapshots"),
   libraryDependencies ++= Seq(
-    "com.lihaoyi" %%% "utest" % "0.4.4" % "test"
+    "com.lihaoyi" %%% "utest" % "0.6.6" % "test"
   ),
   scalacOptions ++= (if (isSnapshot.value) Seq.empty else Seq({
         val a = baseDirectory.value.toURI.toString.replaceFirst("[^/]+/?$", "")
-        val g = "https://raw.githubusercontent.com/jokade/scalajs-rxjs"
+        val g = "https://raw.githubusercontent.com/surprof/scalajs-rxjs"
         s"-P:scalajs:mapSourceURI:$a->$g/v${version.value}/"
       }))
 )
 
 lazy val crossSettings = Seq(
-  scalaVersion := "2.11.11",
-  crossScalaVersions := Seq("2.11.11","2.12.2")
+  scalaVersion := "2.12.8",
+  crossScalaVersions := Seq("2.12.8")
 )
 
 lazy val rxjs = project.in(file("."))
@@ -44,7 +44,7 @@ lazy val publishingSettings = Seq(
       Some("releases"  at nexus + "service/local/staging/deploy/maven2")
   },
   pomExtra := (
-    <url>https://github.com/jokade/scalajs-rxjs</url>
+    <url>https://github.com/surprof/scalajs-rxjs</url>
     <licenses>
       <license>
         <name>MIT License</name>
@@ -52,14 +52,14 @@ lazy val publishingSettings = Seq(
       </license>
     </licenses>
     <scm>
-      <url>git@github.com:jokade/scalajs-rxjs</url>
-      <connection>scm:git:git@github.com:jokade/scalajs-rxjs.git</connection>
+      <url>git@github.com:surprof/scalajs-rxjs</url>
+      <connection>scm:git:git@github.com:surprof/scalajs-rxjs.git</connection>
     </scm>
     <developers>
       <developer>
-        <id>jokade</id>
-        <name>Johannes Kastner</name>
-        <email>jokade@karchedon.de</email>
+        <id>surprof</id>
+        <name>Gabor Suranyi</name>
+        <email>45617562+surprof@users.noreply.github.com</email>
       </developer>
     </developers>
   )
