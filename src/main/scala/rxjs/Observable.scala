@@ -15,6 +15,9 @@ import scala.scalajs.js.annotation.{JSImport, JSName}
 @js.native
 trait Observable[+T] extends js.Object {
 
+  @JSName("pipe")
+  def pipeJS[R, P, Q](fns: Observable[P] => Observable[Q] *): Observable[R] = js.native
+
   @JSName("subscribe")
   def subscribeJS(): Subscription = js.native
   @JSName("subscribe")
@@ -101,6 +104,9 @@ object Observable {
     @inline
     @deprecated("Use catch() or catchOrRetry() instead","0.0.3")
     def onError[R](default: =>R)(onError: js.Any=>Any): Observable[R] = Operators._catch(o,(error:js.Any,obs:Observable[_])=>{onError(error);Observable.of(default)})
+
+    @inline
+    def pipe[R](fns: Observable[T] => Observable[R] *): Observable[R] = o.pipeJS(fns :_*)
 
     @inline
     def subscribe[R](next: T=>R): Subscription = o.subscribeJS(next: js.Function1[T,_],js.undefined,js.undefined)
